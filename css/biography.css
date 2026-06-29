@@ -1,0 +1,147 @@
+/* ============================================================
+   BIOGRAPHY PAGE — Smooth Scroll & Enhanced Styles
+   ============================================================ */
+
+/* Smooth scroll behavior for biography page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced smooth scrolling via CSS scroll-timeline and custom easing */
+.bio-smooth-container {
+  will-change: transform;
+}
+
+/* Bio article paragraph reveal animations — handled by JS */
+.bio-article > p,
+.bio-article > blockquote,
+.bio-article > h2 {
+  /* Initial state set by JS to avoid FOUC */
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Staggered delays for bio article children */
+.bio-article > *:nth-child(1)  { transition-delay: 0.05s; }
+.bio-article > *:nth-child(2)  { transition-delay: 0.10s; }
+.bio-article > *:nth-child(3)  { transition-delay: 0.15s; }
+.bio-article > *:nth-child(4)  { transition-delay: 0.20s; }
+.bio-article > *:nth-child(5)  { transition-delay: 0.25s; }
+.bio-article > *:nth-child(6)  { transition-delay: 0.30s; }
+.bio-article > *:nth-child(7)  { transition-delay: 0.35s; }
+.bio-article > *:nth-child(8)  { transition-delay: 0.40s; }
+.bio-article > *:nth-child(9)  { transition-delay: 0.45s; }
+.bio-article > *:nth-child(10) { transition-delay: 0.50s; }
+.bio-article > *:nth-child(11) { transition-delay: 0.55s; }
+
+/* Milestone list items */
+.milestones-list li {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Reading progress bar */
+.bio-progress-bar {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--crimson));
+  z-index: 101;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Smooth scroll snap for bio sections */
+.bio-section-snap {
+  scroll-snap-align: start;
+}
+
+/* Enhanced blockquote styling */
+.bio-article blockquote {
+  position: relative;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+  border-left: 2px solid var(--gold);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.bio-article blockquote.crimson-border {
+  border-color: var(--crimson);
+  background: rgba(139, 26, 26, 0.04);
+}
+
+.bio-article blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.bio-article blockquote.crimson-border::before {
+  color: var(--crimson);
+}
+
+/* Floating sidebar enhancement */
+@media (min-width: 1100px) {
+  .bio-sidebar {
+    position: sticky;
+    top: calc(var(--nav-h) + 2.5rem);
+    max-height: calc(100vh - var(--nav-h) - 5rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) transparent;
+    padding-right: 0.5rem;
+  }
+
+  .bio-sidebar::-webkit-scrollbar { width: 3px; }
+  .bio-sidebar::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+}
+
+/* Active milestone highlight */
+.milestones-list li.active .milestone-year {
+  color: var(--gold-light);
+}
+.milestones-list li.active .milestone-what {
+  color: var(--ivory);
+}
+.milestones-list li {
+  padding: 0.25rem 0;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.milestones-list li:hover .milestone-year {
+  color: var(--gold-light);
+}
+.milestones-list li:hover .milestone-what {
+  color: var(--ivory);
+}
+
+/* Section divider within bio */
+.bio-section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  color: var(--gold-dim);
+}
+.bio-section-divider::before,
+.bio-section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gold-dim);
+}
+.bio-section-divider span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
